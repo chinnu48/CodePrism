@@ -1,0 +1,1539 @@
+[
+  {
+    "id": 1,
+    "title": "Factorial using Recursion",
+    "topic": "Recursion",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["base_case", "recursive_thinking", "function_design"],
+    "description": "Implement solve(n) and return factorial of n.",
+    "test_cases": [
+      {"input": 5, "output": 120},
+      {"input": 3, "output": 6},
+      {"input": 0, "output": 1}
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Binary Search Index",
+    "topic": "Binary Search",
+    "difficulty": "Easy",
+    "expected_time": 15,
+    "concept_tags": ["sorted_arrays", "two_pointers", "loop_invariants"],
+    "description": "Implement solve(nums, target). Return the index of target, or -1 if not found.",
+    "test_cases": [
+      {"input": [[1, 2, 3, 4, 5], 3], "output": 2},
+      {"input": [[2, 4, 6, 8, 10], 7], "output": -1},
+      {"input": [[5], 5], "output": 0}
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Frequency Counter",
+    "topic": "Hash Maps",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["dictionary", "frequency", "iteration"],
+    "description": "Implement solve(items). Return a dictionary mapping each item to its count.",
+    "test_cases": [
+      {"input": ["a", "b", "a", "c", "b", "a"], "output": {"a": 3, "b": 2, "c": 1}},
+      {"input": [1, 2, 2, 3, 3, 3], "output": {"1": 1, "2": 2, "3": 3}}
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Two Sum Indices",
+    "topic": "Arrays",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["hash_map", "index_tracking"],
+    "description": "Implement solve(nums, target). Return [i, j] where nums[i] + nums[j] == target.",
+    "test_cases": [
+      {"input": [[2, 7, 11, 15], 9], "output": [0, 1]},
+      {"input": [[3, 2, 4], 6], "output": [1, 2]},
+      {"input": [[3, 3], 6], "output": [0, 1]}
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Reverse Words",
+    "topic": "Strings",
+    "difficulty": "Easy",
+    "expected_time": 8,
+    "concept_tags": ["split", "join", "string_processing"],
+    "description": "Implement solve(s). Return words in reverse order with single spaces.",
+    "test_cases": [
+      {"input": "the sky is blue", "output": "blue is sky the"},
+      {"input": "  hello   world  ", "output": "world hello"}
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Valid Parentheses",
+    "topic": "Stacks",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["stack", "matching_pairs"],
+    "description": "Implement solve(s). Return True if the bracket string is valid.",
+    "test_cases": [
+      {"input": "()[]{}", "output": true},
+      {"input": "(]", "output": false},
+      {"input": "([{}])", "output": true}
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Maximum Subarray Sum",
+    "topic": "Dynamic Programming",
+    "difficulty": "Medium",
+    "expected_time": 15,
+    "concept_tags": ["kadane", "optimization"],
+    "description": "Implement solve(nums). Return the maximum sum of a contiguous subarray.",
+    "test_cases": [
+      {"input": [-2, 1, -3, 4, -1, 2, 1, -5, 4], "output": 6},
+      {"input": [1], "output": 1},
+      {"input": [5, 4, -1, 7, 8], "output": 23}
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Fibonacci Tabulation",
+    "topic": "Dynamic Programming",
+    "difficulty": "Easy",
+    "expected_time": 12,
+    "concept_tags": ["tabulation", "state_transition"],
+    "description": "Implement solve(n). Return nth Fibonacci number where F(0)=0 and F(1)=1.",
+    "test_cases": [
+      {"input": 0, "output": 0},
+      {"input": 1, "output": 1},
+      {"input": 10, "output": 55}
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Rotate Array Right",
+    "topic": "Arrays",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["array_manipulation", "modulo"],
+    "description": "Implement solve(nums, k). Return array rotated right by k steps.",
+    "test_cases": [
+      {"input": [[1, 2, 3, 4, 5, 6, 7], 3], "output": [5, 6, 7, 1, 2, 3, 4]},
+      {"input": [[-1, -100, 3, 99], 2], "output": [3, 99, -1, -100]}
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Longest Unique Substring Length",
+    "topic": "Sliding Window",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["window", "hash_set", "two_pointers"],
+    "description": "Implement solve(s). Return length of the longest substring without repeating characters.",
+    "test_cases": [
+      {"input": "abcabcbb", "output": 3},
+      {"input": "bbbbb", "output": 1},
+      {"input": "pwwkew", "output": 3}
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Merge Intervals",
+    "topic": "Intervals",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["sorting", "greedy", "ranges"],
+    "description": "Implement solve(intervals). Merge overlapping intervals and return sorted merged intervals.",
+    "test_cases": [
+      {"input": [[1, 3], [2, 6], [8, 10], [15, 18]], "output": [[1, 6], [8, 10], [15, 18]]},
+      {"input": [[1, 4], [4, 5]], "output": [[1, 5]]}
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Valid Palindrome (Alnum Only)",
+    "topic": "Strings",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["two_pointers", "normalization"],
+    "description": "Implement solve(s). Ignore non-alphanumeric chars and case, then return palindrome validity.",
+    "test_cases": [
+      {"input": "A man, a plan, a canal: Panama", "output": true},
+      {"input": "race a car", "output": false}
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Counting Sort (0-9)",
+    "topic": "Sorting",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["counting_array", "frequency"],
+    "description": "Implement solve(nums). nums contains only digits 0 to 9. Return sorted list.",
+    "test_cases": [
+      {"input": [4, 2, 2, 8, 3, 3, 1], "output": [1, 2, 2, 3, 3, 4, 8]},
+      {"input": [9, 0, 5, 5, 1], "output": [0, 1, 5, 5, 9]}
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Matrix Diagonal Sum",
+    "topic": "Matrices",
+    "difficulty": "Easy",
+    "expected_time": 9,
+    "concept_tags": ["matrix_traversal", "indexing"],
+    "description": "Implement solve(mat). Return sum of primary and secondary diagonal (center counted once).",
+    "test_cases": [
+      {"input": [[1, 2, 3], [4, 5, 6], [7, 8, 9]], "output": 25},
+      {"input": [[7]], "output": 7}
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Number of Islands",
+    "topic": "Graphs",
+    "difficulty": "Hard",
+    "expected_time": 25,
+    "concept_tags": ["dfs", "grid", "visited"],
+    "description": "Implement solve(grid). grid is list of list of '0'/'1'. Return number of islands.",
+    "test_cases": [
+      {"input": [["1", "1", "0", "0", "0"], ["1", "1", "0", "0", "0"], ["0", "0", "1", "0", "0"], ["0", "0", "0", "1", "1"]], "output": 3},
+      {"input": [["1", "1", "1"], ["0", "1", "0"], ["1", "1", "1"]], "output": 1}
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Power Function",
+    "topic": "Recursion",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["divide_and_conquer", "fast_power"],
+    "description": "Implement solve(x, n). Return x^n for integer n >= 0.",
+    "test_cases": [
+      {"input": [2, 10], "output": 1024},
+      {"input": [3, 0], "output": 1},
+      {"input": [5, 3], "output": 125}
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Range Sum Queries",
+    "topic": "Prefix Sum",
+    "difficulty": "Medium",
+    "expected_time": 15,
+    "concept_tags": ["prefix_array", "batch_queries"],
+    "description": "Implement solve(nums, queries). queries is list of [l, r]. Return sum(nums[l:r+1]) for each query.",
+    "test_cases": [
+      {"input": [[1, 2, 3, 4, 5], [[0, 2], [1, 3], [2, 4]]], "output": [6, 9, 12]},
+      {"input": [[5, -2, 7, 1], [[0, 0], [0, 3], [2, 2]]], "output": [5, 11, 7]}
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Top K Frequent Elements",
+    "topic": "Heaps",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["heap", "frequency_map", "selection"],
+    "description": "Implement solve(nums, k). Return k most frequent elements sorted ascending.",
+    "test_cases": [
+      {"input": [[1, 1, 1, 2, 2, 3], 2], "output": [1, 2]},
+      {"input": [[4, 4, 4, 6, 6, 7, 7, 7, 7], 1], "output": [7]}
+    ]
+  }
+,
+  {
+    "id": 19,
+    "title": "Find Maximum and Minimum Element",
+    "topic": "Arrays",
+    "difficulty": "Easy",
+    "expected_time": 8,
+    "concept_tags": ["scan", "max", "min"],
+    "description": "Implement solve(nums). Return [minimum, maximum] from the array.",
+    "test_cases": [
+      {"input": [3, 1, 9, 2], "output": [1, 9]},
+      {"input": [-5, -2, -9], "output": [-9, -2]}
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Move Zeroes To End",
+    "topic": "Arrays",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["two_pointers", "stable_partition"],
+    "description": "Implement solve(nums). Return the array with all zeroes moved to the end while keeping non-zero order.",
+    "test_cases": [
+      {"input": [0, 1, 0, 3, 12], "output": [1, 3, 12, 0, 0]},
+      {"input": [1, 2, 3], "output": [1, 2, 3]}
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Merge Two Sorted Arrays",
+    "topic": "Arrays",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["merge", "two_pointers", "sorted_arrays"],
+    "description": "Implement solve(nums1, nums2). Return one merged sorted array.",
+    "test_cases": [
+      {"input": [[1, 3, 5], [2, 4, 6]], "output": [1, 2, 3, 4, 5, 6]},
+      {"input": [[], [1, 2]], "output": [1, 2]}
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Find Duplicates in Array",
+    "topic": "Arrays",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["frequency", "set", "deduplication"],
+    "description": "Implement solve(nums). Return sorted duplicate values that appear more than once.",
+    "test_cases": [
+      {"input": [4, 3, 2, 7, 8, 2, 3, 1], "output": [2, 3]},
+      {"input": [1, 2, 3], "output": []}
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Majority Element",
+    "topic": "Arrays",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["boyer_moore", "counting"],
+    "description": "Implement solve(nums). Return the value appearing more than n/2 times.",
+    "test_cases": [
+      {"input": [3, 2, 3], "output": 3},
+      {"input": [2, 2, 1, 1, 1, 2, 2], "output": 2}
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Trapping Rain Water",
+    "topic": "Arrays",
+    "difficulty": "Hard",
+    "expected_time": 20,
+    "concept_tags": ["two_pointers", "prefix_max", "water_trapping"],
+    "description": "Implement solve(heights). Return total trapped rain water.",
+    "test_cases": [
+      {"input": [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1], "output": 6},
+      {"input": [4, 2, 0, 3, 2, 5], "output": 9}
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Reverse Linked List",
+    "topic": "Linked Lists",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["linked_list", "reverse", "pointers"],
+    "description": "Implement solve(values). The linked list is represented as a Python list. Return the reversed list.",
+    "test_cases": [
+      {"input": [1, 2, 3, 4], "output": [4, 3, 2, 1]},
+      {"input": [7], "output": [7]}
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Detect Cycle in Linked List",
+    "topic": "Linked Lists",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["linked_list", "fast_slow_pointers", "cycle_detection"],
+    "description": "Implement solve(data). data is {\"values\": [...], \"pos\": index_to_link_tail_or_-1}. Return True if a cycle exists.",
+    "test_cases": [
+      {"input": {"values": [3, 2, 0, -4], "pos": 1}, "output": true},
+      {"input": {"values": [1, 2], "pos": -1}, "output": false}
+    ]
+  },
+  {
+    "id": 27,
+    "title": "Merge Two Sorted Linked Lists",
+    "topic": "Linked Lists",
+    "difficulty": "Easy",
+    "expected_time": 12,
+    "concept_tags": ["linked_list", "merge", "sorted_lists"],
+    "description": "Implement solve(list1, list2). Each linked list is represented as a sorted Python list. Return the merged sorted list.",
+    "test_cases": [
+      {"input": [[1, 2, 4], [1, 3, 4]], "output": [1, 1, 2, 3, 4, 4]},
+      {"input": [[], [0]], "output": [0]}
+    ]
+  },
+  {
+    "id": 28,
+    "title": "Middle of Linked List",
+    "topic": "Linked Lists",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["linked_list", "fast_slow_pointers"],
+    "description": "Implement solve(values). The linked list is represented as a list. Return the middle value. If there are two middles, return the second one.",
+    "test_cases": [
+      {"input": [1, 2, 3, 4, 5], "output": 3},
+      {"input": [1, 2, 3, 4, 5, 6], "output": 4}
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Remove Nth Node From End",
+    "topic": "Linked Lists",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["linked_list", "two_pointers"],
+    "description": "Implement solve(values, n). The linked list is represented as a list. Return the list after removing the nth node from the end.",
+    "test_cases": [
+      {"input": [[1, 2, 3, 4, 5], 2], "output": [1, 2, 3, 5]},
+      {"input": [[1], 1], "output": []}
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Intersection of Two Linked Lists",
+    "topic": "Linked Lists",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["linked_list", "intersection", "two_pointers"],
+    "description": "Implement solve(data). data gives two lists and where they intersect: {\"list_a\": [...], \"list_b\": [...], \"skip_a\": i, \"skip_b\": j}. Return the first intersecting value, or null.",
+    "test_cases": [
+      {"input": {"list_a": [4, 1, 8, 4, 5], "list_b": [5, 6, 1, 8, 4, 5], "skip_a": 2, "skip_b": 3}, "output": 8},
+      {"input": {"list_a": [2, 6, 4], "list_b": [1, 5], "skip_a": -1, "skip_b": -1}, "output": null}
+    ]
+  },
+  {
+    "id": 31,
+    "title": "Flatten Multilevel Linked List",
+    "topic": "Linked Lists",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["linked_list", "dfs", "flatten"],
+    "description": "Implement solve(items). A multilevel list is represented by nested Python lists. Flatten it depth-first into one list of values.",
+    "test_cases": [
+      {"input": [1, [2, [3]], 4], "output": [1, 2, 3, 4]},
+      {"input": [[1, 2], 3, [4, 5]], "output": [1, 2, 3, 4, 5]}
+    ]
+  },
+  {
+    "id": 32,
+    "title": "Next Greater Element",
+    "topic": "Stacks",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["monotonic_stack", "next_greater"],
+    "description": "Implement solve(nums). Return an array where each index stores the next greater value to the right, or -1.",
+    "test_cases": [
+      {"input": [4, 5, 2, 25], "output": [5, 25, 25, -1]},
+      {"input": [13, 7, 6, 12], "output": [-1, 12, 12, -1]}
+    ]
+  },
+  {
+    "id": 33,
+    "title": "Min Stack Operations",
+    "topic": "Stacks",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["stack", "get_min", "design"],
+    "description": "Implement solve(ops, values). ops contains commands like push, pop, top, getMin. Return outputs for non-push operations, using null for pop.",
+    "test_cases": [
+      {
+        "input": [["push", "push", "push", "getMin", "pop", "top", "getMin"], [2, 0, 3, null, null, null, null]],
+        "output": [null, 0, 0]
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Evaluate Reverse Polish Notation",
+    "topic": "Stacks",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["stack", "expression_evaluation"],
+    "description": "Implement solve(tokens). Evaluate the reverse Polish expression and return the integer result.",
+    "test_cases": [
+      {"input": ["2", "1", "+", "3", "*"], "output": 9},
+      {"input": ["4", "13", "5", "/", "+"], "output": 6}
+    ]
+  },
+  {
+    "id": 35,
+    "title": "Largest Rectangle in Histogram",
+    "topic": "Stacks",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["monotonic_stack", "histogram", "area"],
+    "description": "Implement solve(heights). Return the largest rectangle area in the histogram.",
+    "test_cases": [
+      {"input": [2, 1, 5, 6, 2, 3], "output": 10},
+      {"input": [2, 4], "output": 4}
+    ]
+  },
+  {
+    "id": 36,
+    "title": "Implement Stack Using Queues",
+    "topic": "Stacks",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["stack", "queue", "design"],
+    "description": "Implement solve(ops, values). Use queue behavior internally. Return outputs for pop, top, and empty operations.",
+    "test_cases": [
+      {
+        "input": [["push", "push", "top", "pop", "empty"], [1, 2, null, null, null]],
+        "output": [2, 2, false]
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "title": "Implement Queue Using Stacks",
+    "topic": "Queues",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["queue", "stack", "design"],
+    "description": "Implement solve(ops, values). Return outputs for peek, pop, and empty operations.",
+    "test_cases": [
+      {
+        "input": [["push", "push", "peek", "pop", "empty"], [1, 2, null, null, null]],
+        "output": [1, 1, false]
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "title": "Circular Queue Operations",
+    "topic": "Queues",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["queue", "circular_buffer", "design"],
+    "description": "Implement solve(k, ops, values). Return outputs for Front, Rear, enQueue, deQueue, isEmpty, and isFull operations.",
+    "test_cases": [
+      {
+        "input": [3, ["enQueue", "enQueue", "enQueue", "enQueue", "Rear", "isFull", "deQueue", "enQueue", "Rear"], [1, 2, 3, 4, null, null, null, 4, null]],
+        "output": [true, true, true, false, 3, true, true, true, 4]
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "title": "Sliding Window Maximum",
+    "topic": "Queues",
+    "difficulty": "Hard",
+    "expected_time": 20,
+    "concept_tags": ["deque", "sliding_window", "maximum"],
+    "description": "Implement solve(nums, k). Return the maximum in every sliding window of size k.",
+    "test_cases": [
+      {"input": [[1, 3, -1, -3, 5, 3, 6, 7], 3], "output": [3, 3, 5, 5, 6, 7]},
+      {"input": [[1], 1], "output": [1]}
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Generate Binary Numbers 1 to N",
+    "topic": "Queues",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["queue", "binary_generation"],
+    "description": "Implement solve(n). Return strings of binary numbers from 1 to n.",
+    "test_cases": [
+      {"input": 5, "output": ["1", "10", "11", "100", "101"]},
+      {"input": 1, "output": ["1"]}
+    ]
+  },
+  {
+    "id": 41,
+    "title": "First Non-Repeating Character in Stream",
+    "topic": "Queues",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["queue", "frequency", "stream"],
+    "description": "Implement solve(stream). After each char, output the first non-repeating char so far, or '#'. Return the list of answers.",
+    "test_cases": [
+      {"input": "aabc", "output": ["a", "#", "b", "b"]},
+      {"input": "zz", "output": ["z", "#"]}
+    ]
+  }
+,
+  {
+    "id": 42,
+    "title": "Binary Tree Traversals",
+    "topic": "Trees",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["tree", "inorder", "preorder", "postorder"],
+    "description": "Implement solve(tree). The tree is a level-order array with null for missing nodes. Return {\"inorder\": [...], \"preorder\": [...], \"postorder\": [...]}.",
+    "test_cases": [
+      {
+        "input": [1, null, 2, 3],
+        "output": {"inorder": [1, 3, 2], "preorder": [1, 2, 3], "postorder": [3, 2, 1]}
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "title": "Binary Tree Level Order Traversal",
+    "topic": "Trees",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["tree", "bfs", "levels"],
+    "description": "Implement solve(tree). Return values level by level.",
+    "test_cases": [
+      {"input": [3, 9, 20, null, null, 15, 7], "output": [[3], [9, 20], [15, 7]]},
+      {"input": [1], "output": [[1]]}
+    ]
+  },
+  {
+    "id": 44,
+    "title": "Check Balanced Binary Tree",
+    "topic": "Trees",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["tree", "height", "dfs"],
+    "description": "Implement solve(tree). Return True if the binary tree is height-balanced.",
+    "test_cases": [
+      {"input": [3, 9, 20, null, null, 15, 7], "output": true},
+      {"input": [1, 2, 2, 3, 3, null, null, 4, 4], "output": false}
+    ]
+  },
+  {
+    "id": 45,
+    "title": "Lowest Common Ancestor in Binary Tree",
+    "topic": "Trees",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["tree", "lca", "dfs"],
+    "description": "Implement solve(data). data is {\"tree\": [...], \"p\": value, \"q\": value}. Return the LCA node value.",
+    "test_cases": [
+      {"input": {"tree": [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4], "p": 5, "q": 1}, "output": 3},
+      {"input": {"tree": [3, 5, 1, 6, 2, 0, 8, null, null, 7, 4], "p": 5, "q": 4}, "output": 5}
+    ]
+  },
+  {
+    "id": 46,
+    "title": "Serialize and Deserialize Binary Tree",
+    "topic": "Trees",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["tree", "serialization", "bfs"],
+    "description": "Implement solve(tree). Serialize then deserialize the level-order tree and return the normalized level-order array with trailing nulls removed.",
+    "test_cases": [
+      {"input": [1, 2, 3, null, null, 4, 5], "output": [1, 2, 3, null, null, 4, 5]},
+      {"input": [], "output": []}
+    ]
+  },
+  {
+    "id": 47,
+    "title": "Diameter of Binary Tree",
+    "topic": "Trees",
+    "difficulty": "Easy",
+    "expected_time": 14,
+    "concept_tags": ["tree", "diameter", "dfs"],
+    "description": "Implement solve(tree). Return the tree diameter measured in edges.",
+    "test_cases": [
+      {"input": [1, 2, 3, 4, 5], "output": 3},
+      {"input": [1, 2], "output": 1}
+    ]
+  },
+  {
+    "id": 48,
+    "title": "Convert Sorted Array to BST",
+    "topic": "Trees",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["tree", "bst", "divide_and_conquer"],
+    "description": "Implement solve(nums). Return the inorder traversal of the BST built from the sorted array. It must match the input array.",
+    "test_cases": [
+      {"input": [-10, -3, 0, 5, 9], "output": [-10, -3, 0, 5, 9]},
+      {"input": [1, 3], "output": [1, 3]}
+    ]
+  },
+  {
+    "id": 49,
+    "title": "Binary Tree Maximum Path Sum",
+    "topic": "Trees",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["tree", "dfs", "path_sum"],
+    "description": "Implement solve(tree). Return the maximum path sum in the binary tree.",
+    "test_cases": [
+      {"input": [1, 2, 3], "output": 6},
+      {"input": [-10, 9, 20, null, null, 15, 7], "output": 42}
+    ]
+  },
+  {
+    "id": 50,
+    "title": "Search in BST",
+    "topic": "Binary Search Trees",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["bst", "search"],
+    "description": "Implement solve(tree, target). Return True if target exists in the BST.",
+    "test_cases": [
+      {"input": [[4, 2, 7, 1, 3], 2], "output": true},
+      {"input": [[4, 2, 7, 1, 3], 5], "output": false}
+    ]
+  },
+  {
+    "id": 51,
+    "title": "Insert into BST",
+    "topic": "Binary Search Trees",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["bst", "insert"],
+    "description": "Implement solve(tree, value). Return the inorder traversal of the BST after insertion.",
+    "test_cases": [
+      {"input": [[4, 2, 7, 1, 3], 5], "output": [1, 2, 3, 4, 5, 7]},
+      {"input": [[40, 20, 60], 10], "output": [10, 20, 40, 60]}
+    ]
+  },
+  {
+    "id": 52,
+    "title": "Delete from BST",
+    "topic": "Binary Search Trees",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["bst", "delete"],
+    "description": "Implement solve(tree, value). Return the inorder traversal after deleting the value from the BST.",
+    "test_cases": [
+      {"input": [[5, 3, 6, 2, 4, null, 7], 3], "output": [2, 4, 5, 6, 7]},
+      {"input": [[5, 3, 6, 2, 4, null, 7], 0], "output": [2, 3, 4, 5, 6, 7]}
+    ]
+  },
+  {
+    "id": 53,
+    "title": "Validate BST",
+    "topic": "Binary Search Trees",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["bst", "validation", "bounds"],
+    "description": "Implement solve(tree). Return True if the tree is a valid BST.",
+    "test_cases": [
+      {"input": [2, 1, 3], "output": true},
+      {"input": [5, 1, 4, null, null, 3, 6], "output": false}
+    ]
+  },
+  {
+    "id": 54,
+    "title": "Kth Smallest in BST",
+    "topic": "Binary Search Trees",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["bst", "inorder", "selection"],
+    "description": "Implement solve(tree, k). Return the kth smallest element in the BST.",
+    "test_cases": [
+      {"input": [[3, 1, 4, null, 2], 1], "output": 1},
+      {"input": [[5, 3, 6, 2, 4, null, null, 1], 3], "output": 3}
+    ]
+  },
+  {
+    "id": 55,
+    "title": "BST to Sorted Doubly Linked List",
+    "topic": "Binary Search Trees",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["bst", "dll", "inorder"],
+    "description": "Implement solve(tree). Return the sorted values of the doubly linked list produced from the BST.",
+    "test_cases": [
+      {"input": [4, 2, 5, 1, 3], "output": [1, 2, 3, 4, 5]},
+      {"input": [2, 1, 3], "output": [1, 2, 3]}
+    ]
+  },
+  {
+    "id": 56,
+    "title": "AVL Tree Rotation Case",
+    "topic": "AVL Trees / Red-Black Trees",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["avl", "rotation", "balancing"],
+    "description": "Implement solve(nums). Insert the values into an AVL tree and return the root value after rebalancing.",
+    "test_cases": [
+      {"input": [30, 20, 10], "output": 20},
+      {"input": [10, 20, 30], "output": 20}
+    ]
+  },
+  {
+    "id": 57,
+    "title": "Range Minimum Query",
+    "topic": "Segment Trees / Fenwick Trees",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["segment_tree", "range_query", "minimum"],
+    "description": "Implement solve(nums, queries). queries is a list of [l, r]. Return the minimum value in each inclusive range.",
+    "test_cases": [
+      {"input": [[1, 3, 2, 7, 9, 11], [[1, 4], [0, 2]]], "output": [2, 1]},
+      {"input": [[5, 4, 3], [[0, 1], [1, 2]]], "output": [4, 3]}
+    ]
+  },
+  {
+    "id": 58,
+    "title": "Fenwick Tree Range Sum with Updates",
+    "topic": "Segment Trees / Fenwick Trees",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["fenwick_tree", "updates", "range_sum"],
+    "description": "Implement solve(data). data is {\"nums\": [...], \"ops\": [[\"sum\", l, r], [\"update\", index, value], ...]}. Return outputs for sum operations.",
+    "test_cases": [
+      {
+        "input": {"nums": [1, 3, 5], "ops": [["sum", 0, 2], ["update", 1, 2], ["sum", 0, 2]]},
+        "output": [9, 8]
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "title": "Implement Trie",
+    "topic": "Trie",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["trie", "prefix_tree", "design"],
+    "description": "Implement solve(ops, words). Supported ops: insert, search, startsWith. Return outputs for search and startsWith.",
+    "test_cases": [
+      {
+        "input": [["insert", "search", "search", "startsWith", "insert", "search"], ["apple", "apple", "app", "app", "app", "app"]],
+        "output": [true, false, true, true]
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "title": "Word Search II",
+    "topic": "Trie",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["trie", "backtracking", "grid_search"],
+    "description": "Implement solve(board, words). Return the found words sorted alphabetically.",
+    "test_cases": [
+      {
+        "input": [[["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]], ["oath", "pea", "eat", "rain"]],
+        "output": ["eat", "oath"]
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "title": "Longest Common Prefix",
+    "topic": "Trie",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["strings", "prefix", "trie"],
+    "description": "Implement solve(words). Return the longest common prefix string.",
+    "test_cases": [
+      {"input": ["flower", "flow", "flight"], "output": "fl"},
+      {"input": ["dog", "racecar", "car"], "output": ""}
+    ]
+  },
+  {
+    "id": 62,
+    "title": "Kth Largest Element",
+    "topic": "Heaps",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["heap", "selection"],
+    "description": "Implement solve(nums, k). Return the kth largest element.",
+    "test_cases": [
+      {"input": [[3, 2, 1, 5, 6, 4], 2], "output": 5},
+      {"input": [[3, 2, 3, 1, 2, 4, 5, 5, 6], 4], "output": 4}
+    ]
+  },
+  {
+    "id": 63,
+    "title": "Merge K Sorted Lists",
+    "topic": "Heaps",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["heap", "linked_list", "merge_k"],
+    "description": "Implement solve(lists). Each linked list is represented as a sorted array. Return one merged sorted list.",
+    "test_cases": [
+      {"input": [[1, 4, 5], [1, 3, 4], [2, 6]], "output": [1, 1, 2, 3, 4, 4, 5, 6]},
+      {"input": [[], []], "output": []}
+    ]
+  },
+  {
+    "id": 64,
+    "title": "Median in a Stream",
+    "topic": "Heaps",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["heap", "stream", "median"],
+    "description": "Implement solve(nums). Insert numbers one by one and return the running medians.",
+    "test_cases": [
+      {"input": [5, 15, 1, 3], "output": [5, 10.0, 5, 4.0]},
+      {"input": [2, 4, 6], "output": [2, 3.0, 4]}
+    ]
+  },
+  {
+    "id": 65,
+    "title": "Heap Sort",
+    "topic": "Heaps",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["heap", "sorting"],
+    "description": "Implement solve(nums). Return the array sorted in ascending order using heap sort.",
+    "test_cases": [
+      {"input": [4, 10, 3, 5, 1], "output": [1, 3, 4, 5, 10]},
+      {"input": [1], "output": [1]}
+    ]
+  },
+  {
+    "id": 66,
+    "title": "Graph DFS and BFS Traversal",
+    "topic": "Graphs",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["graph", "dfs", "bfs"],
+    "description": "Implement solve(graph, start). graph is an adjacency list map. Return {\"dfs\": [...], \"bfs\": [...]} traversal orders.",
+    "test_cases": [
+      {
+        "input": [{"0": [1, 2], "1": [0, 3], "2": [0], "3": [1]}, 0],
+        "output": {"dfs": [0, 1, 3, 2], "bfs": [0, 1, 2, 3]}
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "title": "Detect Cycle in Graph",
+    "topic": "Graphs",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["graph", "cycle_detection"],
+    "description": "Implement solve(data). data is {\"directed\": bool, \"n\": node_count, \"edges\": [[u, v], ...]}. Return True if a cycle exists.",
+    "test_cases": [
+      {"input": {"directed": true, "n": 4, "edges": [[0, 1], [1, 2], [2, 0]]}, "output": true},
+      {"input": {"directed": false, "n": 3, "edges": [[0, 1], [1, 2]]}, "output": false}
+    ]
+  },
+  {
+    "id": 68,
+    "title": "Topological Sort",
+    "topic": "Graphs",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["graph", "dag", "topological_sort"],
+    "description": "Implement solve(n, edges). Return one valid topological ordering.",
+    "test_cases": [
+      {"input": [4, [[0, 1], [0, 2], [1, 3], [2, 3]]], "output": [0, 1, 2, 3]}
+    ]
+  },
+  {
+    "id": 69,
+    "title": "Shortest Path Dijkstra",
+    "topic": "Graphs",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["graph", "dijkstra", "shortest_path"],
+    "description": "Implement solve(n, edges, start). edges is [u, v, w]. Return shortest distances from start, using null for unreachable nodes.",
+    "test_cases": [
+      {"input": [5, [[0, 1, 2], [0, 2, 4], [1, 2, 1], [1, 3, 7], [2, 4, 3], [3, 4, 1]], 0], "output": [0, 2, 3, 9, 6]}
+    ]
+  },
+  {
+    "id": 70,
+    "title": "Minimum Spanning Tree Cost",
+    "topic": "Graphs",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["graph", "mst", "kruskal", "prim"],
+    "description": "Implement solve(n, edges). edges is [u, v, w]. Return the total MST cost.",
+    "test_cases": [
+      {"input": [4, [[0, 1, 10], [0, 2, 6], [0, 3, 5], [1, 3, 15], [2, 3, 4]]], "output": 19}
+    ]
+  },
+  {
+    "id": 71,
+    "title": "Strongly Connected Components Count",
+    "topic": "Graphs",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["graph", "scc", "kosaraju", "tarjan"],
+    "description": "Implement solve(n, edges). Return the number of strongly connected components in the directed graph.",
+    "test_cases": [
+      {"input": [5, [[1, 0], [0, 2], [2, 1], [0, 3], [3, 4]]], "output": 3}
+    ]
+  },
+  {
+    "id": 72,
+    "title": "Word Ladder Length",
+    "topic": "Graphs",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["graph", "bfs", "word_ladder"],
+    "description": "Implement solve(begin_word, end_word, words). Return the shortest transformation length, or 0 if impossible.",
+    "test_cases": [
+      {"input": ["hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]], "output": 5},
+      {"input": ["hit", "cog", ["hot", "dot", "dog", "lot", "log"]], "output": 0}
+    ]
+  }
+,
+  {
+    "id": 73,
+    "title": "Group Anagrams",
+    "topic": "Hashing",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["hash_map", "strings", "grouping"],
+    "description": "Implement solve(words). Return groups of anagrams with each group sorted, and groups ordered by first element.",
+    "test_cases": [
+      {"input": ["eat", "tea", "tan", "ate", "nat", "bat"], "output": [["ate", "eat", "tea"], ["bat"], ["nat", "tan"]]}
+    ]
+  },
+  {
+    "id": 74,
+    "title": "Subarray Sum Equals K",
+    "topic": "Hashing",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["prefix_sum", "hash_map", "subarray"],
+    "description": "Implement solve(nums, k). Return the count of continuous subarrays whose sum equals k.",
+    "test_cases": [
+      {"input": [[1, 1, 1], 2], "output": 2},
+      {"input": [[1, 2, 3], 3], "output": 2}
+    ]
+  },
+  {
+    "id": 75,
+    "title": "Connected Components with DSU",
+    "topic": "Disjoint Set Union (Union-Find)",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["dsu", "union_find", "components"],
+    "description": "Implement solve(n, edges). Return the number of connected components in the undirected graph.",
+    "test_cases": [
+      {"input": [5, [[0, 1], [1, 2], [3, 4]]], "output": 2},
+      {"input": [4, [[0, 1], [1, 2], [2, 3]]], "output": 1}
+    ]
+  },
+  {
+    "id": 76,
+    "title": "Bubble Sort",
+    "topic": "Sorting Algorithms",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["sorting", "bubble_sort"],
+    "description": "Implement solve(nums). Return the array sorted in ascending order using bubble sort.",
+    "test_cases": [
+      {"input": [5, 1, 4, 2, 8], "output": [1, 2, 4, 5, 8]},
+      {"input": [1], "output": [1]}
+    ]
+  },
+  {
+    "id": 77,
+    "title": "Selection Sort",
+    "topic": "Sorting Algorithms",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["sorting", "selection_sort"],
+    "description": "Implement solve(nums). Return the array sorted in ascending order using selection sort.",
+    "test_cases": [
+      {"input": [64, 25, 12, 22, 11], "output": [11, 12, 22, 25, 64]},
+      {"input": [2, 1], "output": [1, 2]}
+    ]
+  },
+  {
+    "id": 78,
+    "title": "Insertion Sort",
+    "topic": "Sorting Algorithms",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["sorting", "insertion_sort"],
+    "description": "Implement solve(nums). Return the array sorted in ascending order using insertion sort.",
+    "test_cases": [
+      {"input": [12, 11, 13, 5, 6], "output": [5, 6, 11, 12, 13]},
+      {"input": [3, 1, 2], "output": [1, 2, 3]}
+    ]
+  },
+  {
+    "id": 79,
+    "title": "Merge Sort",
+    "topic": "Divide and Conquer",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["sorting", "merge_sort", "divide_and_conquer"],
+    "description": "Implement solve(nums). Return the array sorted using merge sort.",
+    "test_cases": [
+      {"input": [38, 27, 43, 3, 9, 82, 10], "output": [3, 9, 10, 27, 38, 43, 82]},
+      {"input": [5, 4, 3, 2, 1], "output": [1, 2, 3, 4, 5]}
+    ]
+  },
+  {
+    "id": 80,
+    "title": "Quick Sort",
+    "topic": "Divide and Conquer",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["sorting", "quick_sort", "partition"],
+    "description": "Implement solve(nums). Return the array sorted using quick sort.",
+    "test_cases": [
+      {"input": [10, 7, 8, 9, 1, 5], "output": [1, 5, 7, 8, 9, 10]},
+      {"input": [3, 3, 2, 1], "output": [1, 2, 3, 3]}
+    ]
+  },
+  {
+    "id": 81,
+    "title": "Radix Sort",
+    "topic": "Sorting Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["sorting", "radix_sort", "digits"],
+    "description": "Implement solve(nums). Return the array sorted in ascending order using radix sort.",
+    "test_cases": [
+      {"input": [170, 45, 75, 90, 802, 24, 2, 66], "output": [2, 24, 45, 66, 75, 90, 170, 802]}
+    ]
+  },
+  {
+    "id": 82,
+    "title": "Search in Rotated Sorted Array",
+    "topic": "Searching Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["binary_search", "rotated_array"],
+    "description": "Implement solve(nums, target). Return the index of target, or -1 if missing.",
+    "test_cases": [
+      {"input": [[4, 5, 6, 7, 0, 1, 2], 0], "output": 4},
+      {"input": [[4, 5, 6, 7, 0, 1, 2], 3], "output": -1}
+    ]
+  },
+  {
+    "id": 83,
+    "title": "Find Peak Element",
+    "topic": "Searching Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["binary_search", "peak"],
+    "description": "Implement solve(nums). Return any peak index.",
+    "test_cases": [
+      {"input": [1, 2, 3, 1], "output": 2},
+      {"input": [1, 2, 1, 3, 5, 6, 4], "output": 5}
+    ]
+  },
+  {
+    "id": 84,
+    "title": "N-Queens Count",
+    "topic": "Recursion and Backtracking",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["backtracking", "n_queens"],
+    "description": "Implement solve(n). Return the number of valid N-Queens arrangements.",
+    "test_cases": [
+      {"input": 4, "output": 2},
+      {"input": 1, "output": 1}
+    ]
+  },
+  {
+    "id": 85,
+    "title": "Sudoku Solver",
+    "topic": "Recursion and Backtracking",
+    "difficulty": "Hard",
+    "expected_time": 30,
+    "concept_tags": ["backtracking", "sudoku"],
+    "description": "Implement solve(board). The board is a 9x9 grid with '.' for blanks. Return the solved board.",
+    "test_cases": [
+      {
+        "input": [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9", "5", ".", ".", "."], [".", "9", "8", ".", ".", ".", ".", "6", "."], ["8", ".", ".", ".", "6", ".", ".", ".", "3"], ["4", ".", ".", "8", ".", "3", ".", ".", "1"], ["7", ".", ".", ".", "2", ".", ".", ".", "6"], [".", "6", ".", ".", ".", ".", "2", "8", "."], [".", ".", ".", "4", "1", "9", ".", ".", "5"], [".", ".", ".", ".", "8", ".", ".", "7", "9"]],
+        "output": [["5", "3", "4", "6", "7", "8", "9", "1", "2"], ["6", "7", "2", "1", "9", "5", "3", "4", "8"], ["1", "9", "8", "3", "4", "2", "5", "6", "7"], ["8", "5", "9", "7", "6", "1", "4", "2", "3"], ["4", "2", "6", "8", "5", "3", "7", "9", "1"], ["7", "1", "3", "9", "2", "4", "8", "5", "6"], ["9", "6", "1", "5", "3", "7", "2", "8", "4"], ["2", "8", "7", "4", "1", "9", "6", "3", "5"], ["3", "4", "5", "2", "8", "6", "1", "7", "9"]]
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "title": "Subset Sum Decision",
+    "topic": "Recursion and Backtracking",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["backtracking", "subset_sum"],
+    "description": "Implement solve(nums, target). Return True if any subset sums to target.",
+    "test_cases": [
+      {"input": [[3, 34, 4, 12, 5, 2], 9], "output": true},
+      {"input": [[3, 34, 4, 12, 5, 2], 30], "output": false}
+    ]
+  },
+  {
+    "id": 87,
+    "title": "Permutations",
+    "topic": "Recursion and Backtracking",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["backtracking", "permutations"],
+    "description": "Implement solve(nums). Return all permutations in lexicographic order.",
+    "test_cases": [
+      {"input": [1, 2, 3], "output": [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]}
+    ]
+  },
+  {
+    "id": 88,
+    "title": "Word Break",
+    "topic": "Recursion and Backtracking",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["dp", "backtracking", "strings"],
+    "description": "Implement solve(s, words). Return True if s can be segmented using the dictionary words.",
+    "test_cases": [
+      {"input": ["leetcode", ["leet", "code"]], "output": true},
+      {"input": ["catsandog", ["cats", "dog", "sand", "and", "cat"]], "output": false}
+    ]
+  },
+  {
+    "id": 89,
+    "title": "Closest Pair of Points",
+    "topic": "Divide and Conquer",
+    "difficulty": "Hard",
+    "expected_time": 26,
+    "concept_tags": ["geometry", "divide_and_conquer"],
+    "description": "Implement solve(points). Return the minimum Euclidean distance rounded to 3 decimals.",
+    "test_cases": [
+      {"input": [[2, 3], [12, 30], [40, 50], [5, 1], [12, 10], [3, 4]], "output": 1.414}
+    ]
+  },
+  {
+    "id": 90,
+    "title": "0/1 Knapsack",
+    "topic": "Dynamic Programming",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["dp", "knapsack"],
+    "description": "Implement solve(weights, values, capacity). Return the maximum achievable value.",
+    "test_cases": [
+      {"input": [[10, 20, 30], [60, 100, 120], 50], "output": 220},
+      {"input": [[1, 2, 3], [6, 10, 12], 5], "output": 22}
+    ]
+  },
+  {
+    "id": 91,
+    "title": "Longest Common Subsequence",
+    "topic": "Dynamic Programming",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["dp", "strings", "lcs"],
+    "description": "Implement solve(text1, text2). Return the LCS length.",
+    "test_cases": [
+      {"input": ["abcde", "ace"], "output": 3},
+      {"input": ["abc", "abc"], "output": 3}
+    ]
+  },
+  {
+    "id": 92,
+    "title": "Coin Change Minimum Coins",
+    "topic": "Dynamic Programming",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["dp", "coin_change"],
+    "description": "Implement solve(coins, amount). Return the minimum number of coins, or -1 if impossible.",
+    "test_cases": [
+      {"input": [[1, 2, 5], 11], "output": 3},
+      {"input": [[2], 3], "output": -1}
+    ]
+  },
+  {
+    "id": 93,
+    "title": "Edit Distance",
+    "topic": "Dynamic Programming",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["dp", "strings", "edit_distance"],
+    "description": "Implement solve(word1, word2). Return the minimum edit distance.",
+    "test_cases": [
+      {"input": ["horse", "ros"], "output": 3},
+      {"input": ["intention", "execution"], "output": 5}
+    ]
+  },
+  {
+    "id": 94,
+    "title": "Maximum Sum Increasing Subsequence",
+    "topic": "Dynamic Programming",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["dp", "subsequence"],
+    "description": "Implement solve(nums). Return the maximum sum of a strictly increasing subsequence.",
+    "test_cases": [
+      {"input": [1, 101, 2, 3, 100, 4, 5], "output": 106},
+      {"input": [3, 4, 5, 10], "output": 22}
+    ]
+  },
+  {
+    "id": 95,
+    "title": "Matrix Chain Multiplication",
+    "topic": "Dynamic Programming",
+    "difficulty": "Hard",
+    "expected_time": 24,
+    "concept_tags": ["dp", "matrix_chain"],
+    "description": "Implement solve(dims). Return the minimum number of scalar multiplications needed.",
+    "test_cases": [
+      {"input": [1, 2, 3, 4], "output": 18},
+      {"input": [10, 30, 5, 60], "output": 4500}
+    ]
+  },
+  {
+    "id": 96,
+    "title": "Activity Selection",
+    "topic": "Greedy Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["greedy", "intervals"],
+    "description": "Implement solve(starts, ends). Return the maximum number of non-overlapping activities.",
+    "test_cases": [
+      {"input": [[1, 3, 0, 5, 8, 5], [2, 4, 6, 7, 9, 9]], "output": 4}
+    ]
+  },
+  {
+    "id": 97,
+    "title": "Huffman Coding Cost",
+    "topic": "Greedy Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["greedy", "heap", "huffman"],
+    "description": "Implement solve(freqs). Return the total cost of building the Huffman tree.",
+    "test_cases": [
+      {"input": [5, 9, 12, 13, 16, 45], "output": 224}
+    ]
+  },
+  {
+    "id": 98,
+    "title": "Job Sequencing with Deadlines",
+    "topic": "Greedy Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["greedy", "scheduling"],
+    "description": "Implement solve(jobs). Each job is [deadline, profit]. Return the maximum profit achievable.",
+    "test_cases": [
+      {"input": [[2, 100], [1, 19], [2, 27], [1, 25], [3, 15]], "output": 142}
+    ]
+  },
+  {
+    "id": 99,
+    "title": "Fractional Knapsack",
+    "topic": "Greedy Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["greedy", "knapsack", "ratios"],
+    "description": "Implement solve(weights, values, capacity). Items may be taken fractionally. Return the maximum value as a float.",
+    "test_cases": [
+      {"input": [[10, 40, 20, 30], [60, 40, 100, 120], 50], "output": 240.0}
+    ]
+  },
+  {
+    "id": 100,
+    "title": "GCD and LCM",
+    "topic": "Mathematical Algorithms",
+    "difficulty": "Easy",
+    "expected_time": 8,
+    "concept_tags": ["math", "gcd", "lcm"],
+    "description": "Implement solve(a, b). Return [gcd, lcm].",
+    "test_cases": [
+      {"input": [12, 18], "output": [6, 36]},
+      {"input": [7, 5], "output": [1, 35]}
+    ]
+  },
+  {
+    "id": 101,
+    "title": "Sieve of Eratosthenes",
+    "topic": "Mathematical Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["math", "primes", "sieve"],
+    "description": "Implement solve(n). Return all prime numbers up to and including n.",
+    "test_cases": [
+      {"input": 10, "output": [2, 3, 5, 7]},
+      {"input": 2, "output": [2]}
+    ]
+  },
+  {
+    "id": 102,
+    "title": "Modular Exponentiation",
+    "topic": "Mathematical Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["math", "fast_power", "modulo"],
+    "description": "Implement solve(base, exponent, mod). Return (base^exponent) % mod.",
+    "test_cases": [
+      {"input": [2, 10, 1000], "output": 24},
+      {"input": [3, 13, 7], "output": 3}
+    ]
+  },
+  {
+    "id": 103,
+    "title": "Prime Factorization",
+    "topic": "Mathematical Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 12,
+    "concept_tags": ["math", "factorization"],
+    "description": "Implement solve(n). Return prime factors in ascending order, including repeats.",
+    "test_cases": [
+      {"input": 84, "output": [2, 2, 3, 7]},
+      {"input": 13, "output": [13]}
+    ]
+  },
+  {
+    "id": 104,
+    "title": "KMP Pattern Search",
+    "topic": "String Algorithms",
+    "difficulty": "Hard",
+    "expected_time": 20,
+    "concept_tags": ["strings", "kmp", "pattern_matching"],
+    "description": "Implement solve(text, pattern). Return all starting indices where pattern appears in text.",
+    "test_cases": [
+      {"input": ["ababcabcabababd", "ababd"], "output": [10]},
+      {"input": ["aaaaa", "aa"], "output": [0, 1, 2, 3]}
+    ]
+  },
+  {
+    "id": 105,
+    "title": "Rabin-Karp Pattern Search",
+    "topic": "String Algorithms",
+    "difficulty": "Hard",
+    "expected_time": 20,
+    "concept_tags": ["strings", "rolling_hash", "pattern_matching"],
+    "description": "Implement solve(text, pattern). Return all starting indices where pattern appears in text.",
+    "test_cases": [
+      {"input": ["abracadabra", "abra"], "output": [0, 7]}
+    ]
+  },
+  {
+    "id": 106,
+    "title": "Z Algorithm Match Positions",
+    "topic": "String Algorithms",
+    "difficulty": "Hard",
+    "expected_time": 20,
+    "concept_tags": ["strings", "z_algorithm"],
+    "description": "Implement solve(text, pattern). Return all starting match indices.",
+    "test_cases": [
+      {"input": ["aabxaabxcaabxaabxay", "aabx"], "output": [0, 4, 9, 13]}
+    ]
+  },
+  {
+    "id": 107,
+    "title": "Longest Palindromic Substring",
+    "topic": "String Algorithms",
+    "difficulty": "Medium",
+    "expected_time": 18,
+    "concept_tags": ["strings", "palindrome"],
+    "description": "Implement solve(s). Return one longest palindromic substring.",
+    "test_cases": [
+      {"input": "babad", "output": "bab"},
+      {"input": "cbbd", "output": "bb"}
+    ]
+  },
+  {
+    "id": 108,
+    "title": "Count Set Bits",
+    "topic": "Bit Manipulation",
+    "difficulty": "Easy",
+    "expected_time": 8,
+    "concept_tags": ["bits", "counting"],
+    "description": "Implement solve(n). Return the number of set bits in n.",
+    "test_cases": [
+      {"input": 11, "output": 3},
+      {"input": 128, "output": 1}
+    ]
+  },
+  {
+    "id": 109,
+    "title": "Single Number",
+    "topic": "Bit Manipulation",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["bits", "xor"],
+    "description": "Implement solve(nums). Every value appears twice except one. Return the single value.",
+    "test_cases": [
+      {"input": [2, 2, 1], "output": 1},
+      {"input": [4, 1, 2, 1, 2], "output": 4}
+    ]
+  },
+  {
+    "id": 110,
+    "title": "Power of Two",
+    "topic": "Bit Manipulation",
+    "difficulty": "Easy",
+    "expected_time": 8,
+    "concept_tags": ["bits", "power_of_two"],
+    "description": "Implement solve(n). Return True if n is a power of two.",
+    "test_cases": [
+      {"input": 16, "output": true},
+      {"input": 18, "output": false}
+    ]
+  },
+  {
+    "id": 111,
+    "title": "Subsets Using Bitmasking",
+    "topic": "Bit Manipulation",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["bits", "subsets", "bitmask"],
+    "description": "Implement solve(nums). Return all subsets ordered by increasing bitmask.",
+    "test_cases": [
+      {"input": [1, 2], "output": [[], [1], [2], [1, 2]]}
+    ]
+  },
+  {
+    "id": 112,
+    "title": "Maximum Sum Subarray of Size K",
+    "topic": "Sliding Window",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["sliding_window", "fixed_window"],
+    "description": "Implement solve(nums, k). Return the maximum sum of any contiguous subarray of length k.",
+    "test_cases": [
+      {"input": [[100, 200, 300, 400], 2], "output": 700},
+      {"input": [[1, 4, 2, 10, 23, 3, 1, 0, 20], 4], "output": 39}
+    ]
+  },
+  {
+    "id": 113,
+    "title": "Longest Substring with K Distinct Characters",
+    "topic": "Sliding Window",
+    "difficulty": "Medium",
+    "expected_time": 16,
+    "concept_tags": ["sliding_window", "hash_map", "strings"],
+    "description": "Implement solve(s, k). Return the maximum length of a substring containing at most k distinct characters.",
+    "test_cases": [
+      {"input": ["eceba", 2], "output": 3},
+      {"input": ["aa", 1], "output": 2}
+    ]
+  },
+  {
+    "id": 114,
+    "title": "Minimum Window Substring",
+    "topic": "Sliding Window",
+    "difficulty": "Hard",
+    "expected_time": 22,
+    "concept_tags": ["sliding_window", "strings", "frequency"],
+    "description": "Implement solve(s, t). Return the minimum window in s containing all chars of t. Return empty string if none.",
+    "test_cases": [
+      {"input": ["ADOBECODEBANC", "ABC"], "output": "BANC"},
+      {"input": ["a", "aa"], "output": ""}
+    ]
+  },
+  {
+    "id": 115,
+    "title": "Pair Sum in Sorted Array",
+    "topic": "Two Pointer Technique",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["two_pointers", "sorted_array"],
+    "description": "Implement solve(nums, target). Return 0-based indices of a pair summing to target, or [-1, -1].",
+    "test_cases": [
+      {"input": [[2, 7, 11, 15], 9], "output": [0, 1]},
+      {"input": [[1, 2, 3, 4], 8], "output": [-1, -1]}
+    ]
+  },
+  {
+    "id": 116,
+    "title": "Remove Duplicates from Sorted Array",
+    "topic": "Two Pointer Technique",
+    "difficulty": "Easy",
+    "expected_time": 10,
+    "concept_tags": ["two_pointers", "in_place_style", "deduplication"],
+    "description": "Implement solve(nums). Return the deduplicated sorted array.",
+    "test_cases": [
+      {"input": [1, 1, 2], "output": [1, 2]},
+      {"input": [0, 0, 1, 1, 1, 2, 2, 3, 3, 4], "output": [0, 1, 2, 3, 4]}
+    ]
+  },
+  {
+    "id": 117,
+    "title": "Container With Most Water",
+    "topic": "Two Pointer Technique",
+    "difficulty": "Medium",
+    "expected_time": 14,
+    "concept_tags": ["two_pointers", "area", "optimization"],
+    "description": "Implement solve(heights). Return the maximum water container area.",
+    "test_cases": [
+      {"input": [1, 8, 6, 2, 5, 4, 8, 3, 7], "output": 49},
+      {"input": [1, 1], "output": 1}
+    ]
+  }
+]
