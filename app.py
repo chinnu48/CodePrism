@@ -4,6 +4,7 @@ import json
 import os
 import time
 import traceback
+from math import ceil
 from typing import Any
 
 import streamlit as st
@@ -20,7 +21,16 @@ from analytics import (
     compute_weakest_topics,
     extract_structural_features,
 )
-from database import fetch_attempts_with_problem_meta, init_db, log_attempt, upsert_problems
+from database import (
+    authenticate_user,
+    create_user,
+    fetch_attempts_with_problem_meta,
+    fetch_problems,
+    init_db,
+    log_attempt,
+    seed_problems,
+    upsert_problems,
+)
 from executor import evaluate_submission
 from platform_integrations import (
     IntegrationError,
@@ -93,7 +103,13 @@ def _inject_styles() -> None:
         [data-testid="stSidebar"] > div:first-child {
             padding-top: 1rem;
         }
-        [data-testid="stSidebar"] * {
+        [data-testid="stSidebar"] h1,
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] h3,
+        [data-testid="stSidebar"] .stMarkdown,
+        [data-testid="stSidebar"] .stCaption,
+        [data-testid="stSidebar"] .st-emotion-cache-10trblm,
+        [data-testid="stSidebar"] .st-emotion-cache-16idsys {
             color: #f4f0e8;
         }
         [data-testid="stSidebar"] label,
@@ -439,7 +455,48 @@ def _inject_styles() -> None:
             border-radius: 18px !important;
             border: 1.5px solid var(--line-strong) !important;
             background: rgba(255, 255, 255, 0.88) !important;
+            color: var(--ink) !important;
+            -webkit-text-fill-color: var(--ink) !important;
             box-shadow: none;
+        }
+        .stTextInput input::placeholder,
+        .stTextArea textarea::placeholder,
+        .stNumberInput input::placeholder {
+            color: var(--muted) !important;
+            opacity: 1 !important;
+        }
+        div[data-baseweb="select"] span,
+        div[data-baseweb="select"] input,
+        div[data-baseweb="base-input"] input {
+            color: var(--ink) !important;
+            -webkit-text-fill-color: var(--ink) !important;
+        }
+        [data-testid="stSidebar"] .stTextInput input,
+        [data-testid="stSidebar"] .stNumberInput input,
+        [data-testid="stSidebar"] .stTextArea textarea,
+        [data-testid="stSidebar"] div[data-baseweb="select"] * ,
+        [data-testid="stSidebar"] div[data-baseweb="base-input"] * {
+            color: var(--ink) !important;
+            -webkit-text-fill-color: var(--ink) !important;
+        }
+        div[data-baseweb="popover"] ul,
+        div[data-baseweb="popover"] [role="listbox"] {
+            background: rgba(255, 255, 255, 0.98) !important;
+            color: var(--ink) !important;
+            border: 1.5px solid var(--line-strong) !important;
+            border-radius: 18px !important;
+        }
+        div[data-baseweb="popover"] li,
+        div[data-baseweb="popover"] [role="option"] {
+            color: var(--ink) !important;
+            background: transparent !important;
+        }
+        div[data-baseweb="popover"] li:hover,
+        div[data-baseweb="popover"] [role="option"]:hover,
+        div[data-baseweb="popover"] li[aria-selected="true"],
+        div[data-baseweb="popover"] [role="option"][aria-selected="true"] {
+            background: rgba(184, 255, 69, 0.24) !important;
+            color: var(--ink) !important;
         }
         .stTextArea textarea {
             min-height: 420px;
@@ -491,7 +548,94 @@ def _render_shell() -> None:
     )
 
 
-def _render_hero(attempts: list[dict[str, Any]]) -> None:
+def _current_user() -> dict[str, Any] | None:
+    user = st.session_state.get("auth_user")
+    if not isinstance(user, dict) or "id" not in user or "username" not in user:
+        return None
+    return user
+
+
+def _set_current_user(user: dict[str, Any]) -> None:
+    previous = _current_user()
+    if previous is None or int(previous["id"]) != int(user["id"]):
+        st.session_state.last_submission = None
+    st.session_state.auth_user = {
+        "id": int(user["id"]),
+        "username": str(user["username"]),
+        "role": str(user.get("role") or "user"),
+        "created_at": user.get("created_at"),
+    }
+
+
+def _logout() -> None:
+    st.session_state.pop("auth_user", None)
+    st.session_state.pop("last_submission", None)
+    for key in list(st.session_state.keys()):
+        if key.startswith("code_"):
+            del st.session_state[key]
+
+
+def _render_auth_page() -> None:
+    st.markdown(
+        (
+            '<div class="hero">'
+            '<div class="hero-kicker">CodePrism Access</div>'
+            "<h1>Login or create an account to keep your practice history private.</h1>"
+            "<p>Your password is stored as a secure hash in the app database, and your submissions stay tied to your account.</p>"
+            "</div>"
+        ),
+        unsafe_allow_html=True,
+    )
+
+    _, center, _ = st.columns([0.9, 1.2, 0.9])
+    with center:
+        st.markdown(
+            (
+                '<div class="surface-card strong tight">'
+                "<div class='eyebrow'>Authentication</div>"
+                "<h3 class='panel-title'>Welcome back</h3>"
+                "<p class='panel-subtitle'>Use an existing account or register a new one to enter the practice studio.</p>"
+                "</div>"
+            ),
+            unsafe_allow_html=True,
+        )
+        login_tab, register_tab = st.tabs(["Login", "Register"])
+
+        with login_tab:
+            with st.form("login_form", clear_on_submit=False):
+                username = st.text_input("Username", key="login_username")
+                password = st.text_input("Password", type="password", key="login_password")
+                submitted = st.form_submit_button("Login", type="primary", use_container_width=True)
+            if submitted:
+                user = authenticate_user(username, password)
+                if user is None:
+                    st.error("Invalid username or password.")
+                else:
+                    _set_current_user(user)
+                    st.success(f"Signed in as {user['username']}.")
+                    st.rerun()
+
+        with register_tab:
+            with st.form("register_form", clear_on_submit=False):
+                username = st.text_input("Choose a username", key="register_username")
+                password = st.text_input("Create a password", type="password", key="register_password")
+                confirm = st.text_input("Confirm password", type="password", key="register_confirm_password")
+                submitted = st.form_submit_button("Create account", type="primary", use_container_width=True)
+            if submitted:
+                if password != confirm:
+                    st.error("Passwords do not match.")
+                else:
+                    try:
+                        user = create_user(username, password)
+                    except ValueError as exc:
+                        st.error(str(exc))
+                    else:
+                        _set_current_user(user)
+                        st.success(f"Account created for {user['username']}.")
+                        st.rerun()
+
+
+def _render_hero(attempts: list[dict[str, Any]], username: str) -> None:
     total = len(attempts)
     accuracy = (100 * sum(int(a["correct"]) for a in attempts) / total) if total else 0.0
     speed = compute_average_speed_index(attempts) if total else 0.0
@@ -499,9 +643,9 @@ def _render_hero(attempts: list[dict[str, Any]]) -> None:
     st.markdown(
         (
             '<div class="hero">'
-            '<div class="hero-kicker">Skill LAB</div>'
+            '<div class="hero-kicker">CodePrism</div>'
             "<h1>Practice with pressure, clarity, and visible progress.</h1>"
-            "<p>A sharper training board for coding drills: pick a target, write the solution, and see what your "
+            f"<p>Signed in as <b>{username}</b>. Pick a target, write the solution, and see what your "
             "speed, confidence, and accuracy are really doing.</p>"
             '<div class="hero-grid">'
             f'<div class="hero-chip"><span class="k">Attempts</span><span class="v">{total}</span></div>'
@@ -527,6 +671,101 @@ def _difficulty_class(difficulty: str) -> str:
     return difficulty.strip().lower()
 
 
+def _pdf_escape(text: str) -> str:
+    return text.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+
+
+def _wrap_report_lines(text: str, width: int = 92) -> list[str]:
+    wrapped: list[str] = []
+    for raw_line in text.splitlines():
+        line = raw_line.rstrip()
+        if not line:
+            wrapped.append("")
+            continue
+        remaining = line
+        while len(remaining) > width:
+            split_at = remaining.rfind(" ", 0, width + 1)
+            if split_at <= 0:
+                split_at = width
+            wrapped.append(remaining[:split_at].rstrip())
+            remaining = remaining[split_at:].lstrip()
+        wrapped.append(remaining)
+    return wrapped
+
+
+def _build_pdf_report(username: str, report_text: str) -> bytes:
+    header_lines = [
+        "Skill Intelligence Report",
+        f"User: {username}",
+        f"Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}",
+        "",
+    ]
+    lines = header_lines + _wrap_report_lines(report_text)
+    lines_per_page = 48
+    total_pages = max(1, ceil(len(lines) / lines_per_page))
+    pages = [lines[idx * lines_per_page : (idx + 1) * lines_per_page] for idx in range(total_pages)]
+
+    objects: list[bytes] = []
+    page_object_numbers: list[int] = []
+    content_object_numbers: list[int] = []
+    font_object_number = 3
+
+    objects.append(b"<< /Type /Catalog /Pages 2 0 R >>")
+
+    pages_kids = []
+    for page_index in range(total_pages):
+        page_number = 4 + (page_index * 2)
+        content_number = page_number + 1
+        page_object_numbers.append(page_number)
+        content_object_numbers.append(content_number)
+        pages_kids.append(f"{page_number} 0 R")
+    pages_object = f"<< /Type /Pages /Kids [{' '.join(pages_kids)}] /Count {total_pages} >>".encode("ascii")
+    objects.append(pages_object)
+    objects.append(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>")
+
+    for page_number, content_number, page_lines in zip(page_object_numbers, content_object_numbers, pages):
+        page_obj = (
+            f"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] "
+            f"/Resources << /Font << /F1 {font_object_number} 0 R >> >> "
+            f"/Contents {content_number} 0 R >>"
+        ).encode("ascii")
+        objects.append(page_obj)
+
+        commands = ["BT", "/F1 12 Tf", "50 748 Td", "14 TL"]
+        for line in page_lines:
+            commands.append(f"({_pdf_escape(line)}) Tj")
+            commands.append("T*")
+        commands.append("ET")
+        stream = "\n".join(commands).encode("latin-1", errors="replace")
+        content_obj = (
+            f"<< /Length {len(stream)} >>\nstream\n".encode("ascii")
+            + stream
+            + b"\nendstream"
+        )
+        objects.append(content_obj)
+
+    pdf = bytearray(b"%PDF-1.4\n")
+    offsets = [0]
+    for index, obj in enumerate(objects, start=1):
+        offsets.append(len(pdf))
+        pdf.extend(f"{index} 0 obj\n".encode("ascii"))
+        pdf.extend(obj)
+        pdf.extend(b"\nendobj\n")
+
+    xref_offset = len(pdf)
+    pdf.extend(f"xref\n0 {len(objects) + 1}\n".encode("ascii"))
+    pdf.extend(b"0000000000 65535 f \n")
+    for offset in offsets[1:]:
+        pdf.extend(f"{offset:010d} 00000 n \n".encode("ascii"))
+    pdf.extend(
+        (
+            f"trailer\n<< /Size {len(objects) + 1} /Root 1 0 R >>\n"
+            f"startxref\n{xref_offset}\n%%EOF"
+        ).encode("ascii")
+    )
+    return bytes(pdf)
+
+
 def _render_sidebar_overview(total_problems: int, filtered_count: int, attempts: list[dict[str, Any]]) -> None:
     solved = sum(1 for item in attempts if item.get("correct"))
     accuracy = (100 * solved / len(attempts)) if attempts else 0.0
@@ -549,9 +788,8 @@ def _render_sidebar_overview(total_problems: int, filtered_count: int, attempts:
 
 def _bootstrap() -> list[dict[str, Any]]:
     init_db()
-    problems = load_problems()
-    upsert_problems(problems)
-    return problems
+    seed_problems(load_problems())
+    return fetch_problems()
 
 
 def _problem_label(problem: dict[str, Any]) -> str:
@@ -564,6 +802,214 @@ def _template_code() -> str:
         "    # Write your solution here\n"
         "    return None\n"
     )
+
+
+def _parse_concept_tags(raw: str) -> list[str]:
+    return [tag.strip() for tag in raw.split(",") if tag.strip()]
+
+
+def _parse_test_cases(raw: str) -> list[dict[str, Any]]:
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise ValueError("Test cases must be valid JSON.") from exc
+
+    if not isinstance(parsed, list) or not parsed:
+        raise ValueError("Test cases must be a non-empty JSON array.")
+
+    normalized: list[dict[str, Any]] = []
+    for idx, case in enumerate(parsed, start=1):
+        if not isinstance(case, dict) or "input" not in case or "output" not in case:
+            raise ValueError(f"Test case #{idx} must contain `input` and `output`.")
+        normalized.append({"input": case["input"], "output": case["output"]})
+    return normalized
+
+
+def _admin_problem_payload(
+    problem_id: int,
+    title: str,
+    topic: str,
+    difficulty: str,
+    expected_time: float,
+    concept_tags_raw: str,
+    description: str,
+    test_cases_raw: str,
+) -> dict[str, Any]:
+    title = title.strip()
+    topic = topic.strip()
+    description = description.strip()
+    concept_tags = _parse_concept_tags(concept_tags_raw)
+    test_cases = _parse_test_cases(test_cases_raw)
+
+    if not title:
+        raise ValueError("Title is required.")
+    if not topic:
+        raise ValueError("Topic is required.")
+    if expected_time <= 0:
+        raise ValueError("Expected time must be greater than 0.")
+    if not concept_tags:
+        raise ValueError("Add at least one concept tag.")
+
+    return {
+        "id": int(problem_id),
+        "title": title,
+        "topic": topic,
+        "difficulty": difficulty,
+        "expected_time": float(expected_time),
+        "concept_tags": concept_tags,
+        "description": description,
+        "test_cases": test_cases,
+    }
+
+
+def _render_admin_panel(problems: list[dict[str, Any]]) -> None:
+    st.markdown('<div class="section-title">Admin Problem Studio</div>', unsafe_allow_html=True)
+    st.markdown(
+        (
+            '<div class="surface-card strong tight">'
+            "<div class='eyebrow'>Admin Access</div>"
+            "<h3 class='panel-title'>Manage the problem bank</h3>"
+            "<p class='panel-subtitle'>Add new problems or update existing ones by topic, concept tags, description, and test cases.</p>"
+            "</div>"
+        ),
+        unsafe_allow_html=True,
+    )
+
+    topic_filter_options = ["All"] + sorted({str(problem["topic"]) for problem in problems})
+    topic_filter = st.selectbox("Filter existing problems by topic", topic_filter_options, key="admin_topic_filter")
+    concept_filter = st.text_input(
+        "Filter by concept tag",
+        key="admin_concept_filter",
+        placeholder="hash_map, recursion, sorting",
+    ).strip().lower()
+
+    filtered_problems = problems
+    if topic_filter != "All":
+        filtered_problems = [problem for problem in filtered_problems if problem["topic"] == topic_filter]
+    if concept_filter:
+        filtered_problems = [
+            problem
+            for problem in filtered_problems
+            if any(concept_filter in tag.lower() for tag in problem["concept_tags"])
+        ]
+
+    next_problem_id = max((int(problem["id"]) for problem in problems), default=0) + 1
+
+    left, right = st.columns(2, gap="large")
+    with left:
+        st.markdown("#### Edit Existing Problem")
+        if not filtered_problems:
+            st.info("No problems match the current admin filters.")
+        else:
+            selected_problem_id = st.selectbox(
+                "Choose a problem to edit",
+                options=[problem["id"] for problem in filtered_problems],
+                format_func=lambda pid: _problem_label(next(problem for problem in filtered_problems if problem["id"] == pid)),
+                key="admin_selected_problem_id",
+            )
+            selected_problem = next(problem for problem in filtered_problems if problem["id"] == selected_problem_id)
+
+            with st.form("admin_edit_problem_form", clear_on_submit=False):
+                title = st.text_input("Title", value=str(selected_problem["title"]))
+                topic = st.text_input("Topic", value=str(selected_problem["topic"]))
+                difficulty = st.selectbox(
+                    "Difficulty",
+                    ["Easy", "Medium", "Hard"],
+                    index=["Easy", "Medium", "Hard"].index(str(selected_problem["difficulty"])),
+                )
+                expected_time = st.number_input(
+                    "Expected Time (min)",
+                    min_value=0.1,
+                    max_value=180.0,
+                    value=float(selected_problem["expected_time"]),
+                    step=0.5,
+                )
+                concept_tags = st.text_input(
+                    "Concept Tags (comma-separated)",
+                    value=", ".join(selected_problem["concept_tags"]),
+                )
+                description = st.text_area("Description", value=str(selected_problem["description"]), height=100)
+                test_cases = st.text_area(
+                    "Test Cases JSON",
+                    value=json.dumps(selected_problem["test_cases"], indent=2),
+                    height=220,
+                )
+                submitted = st.form_submit_button("Save Changes", type="primary", use_container_width=True)
+
+            if submitted:
+                try:
+                    payload = _admin_problem_payload(
+                        problem_id=int(selected_problem["id"]),
+                        title=title,
+                        topic=topic,
+                        difficulty=difficulty,
+                        expected_time=float(expected_time),
+                        concept_tags_raw=concept_tags,
+                        description=description,
+                        test_cases_raw=test_cases,
+                    )
+                    upsert_problems([payload])
+                except ValueError as exc:
+                    st.error(str(exc))
+                else:
+                    st.success(f"Updated problem #{selected_problem['id']}.")
+                    st.rerun()
+
+    with right:
+        st.markdown("#### Add New Problem")
+        with st.form("admin_add_problem_form", clear_on_submit=True):
+            problem_id = st.number_input(
+                "Problem ID",
+                min_value=1,
+                value=int(next_problem_id),
+                step=1,
+            )
+            title = st.text_input("Title", key="admin_add_title")
+            topic = st.text_input("Topic", key="admin_add_topic")
+            difficulty = st.selectbox("Difficulty", ["Easy", "Medium", "Hard"], key="admin_add_difficulty")
+            expected_time = st.number_input(
+                "Expected Time (min)",
+                min_value=0.1,
+                max_value=180.0,
+                value=15.0,
+                step=0.5,
+                key="admin_add_expected_time",
+            )
+            concept_tags = st.text_input(
+                "Concept Tags (comma-separated)",
+                key="admin_add_concept_tags",
+                placeholder="hash_map, recursion, dynamic_programming",
+            )
+            description = st.text_area("Description", key="admin_add_description", height=100)
+            test_cases = st.text_area(
+                "Test Cases JSON",
+                key="admin_add_test_cases",
+                height=220,
+                value='[\n  {"input": 1, "output": 1}\n]',
+            )
+            submitted = st.form_submit_button("Add Problem", type="primary", use_container_width=True)
+
+        if submitted:
+            if any(int(problem["id"]) == int(problem_id) for problem in problems):
+                st.error(f"Problem ID {int(problem_id)} already exists.")
+            else:
+                try:
+                    payload = _admin_problem_payload(
+                        problem_id=int(problem_id),
+                        title=title,
+                        topic=topic,
+                        difficulty=difficulty,
+                        expected_time=float(expected_time),
+                        concept_tags_raw=concept_tags,
+                        description=description,
+                        test_cases_raw=test_cases,
+                    )
+                    upsert_problems([payload])
+                except ValueError as exc:
+                    st.error(str(exc))
+                else:
+                    st.success(f"Added problem #{int(problem_id)}.")
+                    st.rerun()
 
 
 def _filtered_problems(
@@ -629,6 +1075,7 @@ def _evaluate_and_log(
     predicted_time: float,
     confidence: int,
     timeout_seconds: int,
+    user_id: int,
 ) -> dict[str, Any]:
     t0 = time.perf_counter()
     correct, error_tag, results = evaluate_submission(problem, code, timeout_seconds=timeout_seconds)
@@ -646,6 +1093,7 @@ def _evaluate_and_log(
             "correct": correct,
             "error_tag": error_tag,
             "structural_features": json.dumps(structural),
+            "user_id": user_id,
         }
     )
 
@@ -700,7 +1148,7 @@ def _show_submission(result: dict[str, Any]) -> None:
     r2[2].metric("Binary Search Pattern", "Yes" if s["binary_search_pattern"] else "No")
 
 
-def _render_dashboard(attempts: list[dict[str, Any]]) -> None:
+def _render_dashboard(attempts: list[dict[str, Any]], username: str) -> None:
     st.markdown('<div class="section-title">Skill Dashboard</div>', unsafe_allow_html=True)
     if not attempts:
         st.info("No attempts yet. Submit code or import external attempts.")
@@ -765,8 +1213,18 @@ def _render_dashboard(attempts: list[dict[str, Any]]) -> None:
         )
     st.dataframe(trend_rows, use_container_width=True)
 
+    report_text = build_cli_report(attempts)
+    pdf_bytes = _build_pdf_report(username, report_text)
+    st.download_button(
+        "Download PDF Report",
+        data=pdf_bytes,
+        file_name=f"skill-report-{username}.pdf",
+        mime="application/pdf",
+        use_container_width=True,
+    )
+
     with st.expander("Full Text Analytics Report"):
-        st.code(build_cli_report(attempts), language="text")
+        st.code(report_text, language="text")
 
 
 def _render_history(attempts: list[dict[str, Any]]) -> None:
@@ -804,7 +1262,7 @@ def _render_history(attempts: list[dict[str, Any]]) -> None:
     st.dataframe(rows, use_container_width=True)
 
 
-def _render_integrations() -> None:
+def _render_integrations(user_id: int) -> None:
     st.markdown('<div class="section-title">Platform Integrations</div>', unsafe_allow_html=True)
     st.markdown(
         (
@@ -839,6 +1297,7 @@ def _render_integrations() -> None:
                     limit=limit,
                     session_cookie=session_cookie or None,
                     csrf_token=csrf_token or None,
+                    user_id=user_id,
                 )
                 st.success(
                     f"{result.platform}: imported {result.imported} new attempts out of {result.attempted} fetched."
@@ -854,7 +1313,7 @@ def _render_integrations() -> None:
 
         if st.button("Import from Codeforces", type="primary", use_container_width=True):
             try:
-                result = import_codeforces_attempts(handle=handle, count=count)
+                result = import_codeforces_attempts(handle=handle, count=count, user_id=user_id)
                 st.success(
                     f"{result.platform}: imported {result.imported} new attempts out of {result.attempted} fetched."
                 )
@@ -875,9 +1334,15 @@ def main() -> None:
         _inject_styles()
         _render_shell()
 
+    current_user = _current_user()
+
     try:
         problems = _bootstrap()
-        attempts_snapshot = fetch_attempts_with_problem_meta()
+        attempts_snapshot = (
+            fetch_attempts_with_problem_meta(user_id=int(current_user["id"]))
+            if current_user is not None
+            else []
+        )
     except Exception as exc:  # noqa: BLE001
         st.error("Startup failed while loading data or connecting to the database.")
         st.info(
@@ -894,11 +1359,24 @@ def main() -> None:
     if safe_mode:
         st.warning("UI safe mode is ON (`SKILL_LAB_UI_SAFE_MODE=1`). Custom styling is disabled.")
 
-    _render_hero(attempts_snapshot)
+    if current_user is None:
+        _render_auth_page()
+        return
+
+    _render_hero(attempts_snapshot, str(current_user["username"]))
 
     all_topics = sorted({p["topic"] for p in problems})
     all_diff = sorted({p["difficulty"] for p in problems})
 
+    st.sidebar.markdown("### Account")
+    role_label = "Admin" if str(current_user.get("role", "user")) == "admin" else "User"
+    st.sidebar.caption(f"Signed in as `{current_user['username']}`")
+    st.sidebar.caption(f"Role: {role_label}")
+    if st.sidebar.button("Log out", use_container_width=True):
+        _logout()
+        st.rerun()
+
+    st.sidebar.markdown("---")
     st.sidebar.markdown("### Practice Studio")
     st.sidebar.caption("Filter hard. Pick one target. Run the test bench.")
     st.sidebar.markdown("---")
@@ -932,9 +1410,14 @@ def main() -> None:
     confidence = st.sidebar.slider("Confidence", 0, 100, 70)
     timeout = st.sidebar.slider("Timeout per test (sec)", 1, 10, 3)
 
-    solve_tab, dashboard_tab, integrate_tab, history_tab = st.tabs(
-        ["Solve", "Dashboard", "Integrations", "History"]
-    )
+    if str(current_user.get("role", "user")) == "admin":
+        solve_tab, dashboard_tab, integrate_tab, history_tab, admin_tab = st.tabs(
+            ["Solve", "Dashboard", "Integrations", "History", "Admin"]
+        )
+    else:
+        solve_tab, dashboard_tab, integrate_tab, history_tab = st.tabs(
+            ["Solve", "Dashboard", "Integrations", "History"]
+        )
 
     with solve_tab:
         left, right = st.columns([1.0, 1.3], gap="large")
@@ -974,6 +1457,7 @@ def main() -> None:
                             predicted,
                             confidence,
                             timeout,
+                            user_id=int(current_user["id"]),
                         )
 
         last = st.session_state.last_submission
@@ -981,13 +1465,16 @@ def main() -> None:
             st.markdown("---")
             _show_submission(last)
 
-    attempts = fetch_attempts_with_problem_meta()
+    attempts = fetch_attempts_with_problem_meta(user_id=int(current_user["id"]))
     with dashboard_tab:
-        _render_dashboard(attempts)
+        _render_dashboard(attempts, str(current_user["username"]))
     with integrate_tab:
-        _render_integrations()
+        _render_integrations(user_id=int(current_user["id"]))
     with history_tab:
         _render_history(attempts)
+    if str(current_user.get("role", "user")) == "admin":
+        with admin_tab:
+            _render_admin_panel(problems)
 
 
 if __name__ == "__main__":

@@ -126,13 +126,14 @@ def _upsert_external_problem(
                 "concept_tags": concept_tags or [platform],
                 "description": f"Imported from {platform}.",
                 "test_cases": [{"input": None, "output": None}],
+                "problem_source": "external",
             }
         ]
     )
     return pid
 
 
-def import_codeforces_attempts(handle: str, count: int = 50) -> ImportResult:
+def import_codeforces_attempts(handle: str, count: int = 50, user_id: int | None = None) -> ImportResult:
     handle = handle.strip()
     if not handle:
         raise IntegrationError("Codeforces handle is required.")
@@ -190,6 +191,7 @@ def import_codeforces_attempts(handle: str, count: int = 50) -> ImportResult:
                 "structural_features": None,
                 "source_platform": "codeforces",
                 "external_submission_id": external_submission_id,
+                "user_id": user_id,
                 "timestamp": ts,
             }
         )
@@ -254,6 +256,7 @@ def import_leetcode_attempts(
     limit: int = 20,
     session_cookie: str | None = None,
     csrf_token: str | None = None,
+    user_id: int | None = None,
 ) -> ImportResult:
     username = username.strip()
     if not username:
@@ -340,6 +343,7 @@ def import_leetcode_attempts(
                 "structural_features": None,
                 "source_platform": "leetcode",
                 "external_submission_id": str(item.get("id", slug)),
+                "user_id": user_id,
                 "timestamp": _timestamp_from_unix(item.get("timestamp")),
             }
         )
